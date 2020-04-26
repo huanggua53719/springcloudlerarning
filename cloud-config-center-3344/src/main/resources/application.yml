@@ -17,6 +17,22 @@ spring:
       ###读取分支
       label: master
 
+#rabbitmq相关配置
+  rabbitmq:
+    host: 192.168.1.105
+    port: 5672
+    username: admin
+    password: admin
+
+#rabbitmq 相关配置，暴露bus刷新配置的端点  刷新config-server bus总线，其他的3355，3366都获取到新的数据
+  # curl -X POST "http://localhost:3344/actuator/bus-refresh"
+  # 刷新指定的服务 curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
+
 #服务注册到
 eureka:
   client:
